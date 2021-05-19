@@ -4,8 +4,6 @@
 Homestead.yaml
 Homestead.json
 /.idea
-.env
-.env.testing
 *.swp
 *.swo
 *.cfg

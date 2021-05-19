@@ -1,0 +1,54 @@
+        if (empty($filePath)) {
+            if (env('APP_ENV') == 'local') {
+                $user = trim(shell_exec('whoami'));
+                $storePath = "/Users/{$user}/Desktop/";
+            } else {
+                $storePath = "/data/service_data/php/mailtmp/";
+            }
+        }
+
+        Excel::create($excelName,function($excel) use ($data, $sheetName){
+            $excel->sheet($sheetName, function($sheet) use ($data){
+                $sheet->rows($data);
+            });
+        })->store($extension, $storePath);
+        
+        
+        
+        // 发送邮件
+        MailService::sendTemplateMailExcel('mail/finance_income', $to, $title, ['datalist' => $table], $fileList);
+        // 更新执行状态为正常
+        
+        
+            /**
+     * 发送带有Excel附件的邮件
+     * @param $templateName
+     * @param $to
+     * @param $title
+     * @param array $data
+     * @param array $fileList
+     * @param string $filePath
+     * @param string $extension
+     */
+    public static function sendTemplateMailExcel($templateName, $to, $title, $data = [], $fileList = [], $filePath = '', $extension = 'xls')
+    {
+        if (empty($filePath)) {
+            if (env('APP_ENV') == 'local') {
+                $user = trim(shell_exec('whoami'));
+                $filePath = "/Users/{$user}/Desktop";
+            } else {
+                $filePath = "/data/service_data/php/mailtmp";
+            }
+        }
+        Mail::send($templateName, $data, function ($message) use($to, $title, $fileList, $filePath, $extension) {
+            if (!empty($fileList)) {
+                foreach ($fileList as $fileName) {
+                    $fileName = $filePath . '/' . $fileName . '.' . $extension;
+                    $message->attach($fileName);
+                }
+            }
+
+            $receiver = explode(',', $to);
+            $message->to($receiver)->subject($title);
+        });
+    }

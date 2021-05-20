@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware(['common'])
             ->middleware('api.auth')
             ->namespace($this->namespace)
-            ->group(base_path('routes/userApi.php'));
+            ->group(base_path('routes/user.php'));
     }
 
     /**
@@ -85,6 +85,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('passport')
             ->middleware(['common'])
             ->namespace($this->namespace)
-            ->group(base_path('routes/passportApi.php'));
+            ->group(base_path('routes/passport.php'));
     }
 }

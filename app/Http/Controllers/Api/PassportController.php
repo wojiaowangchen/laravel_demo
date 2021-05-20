@@ -35,12 +35,10 @@ class PassportController extends Controller
     }
 
     /**
-     * 用户登录
+     * 用户登录，拿到token
      */
     public function login(Request $request)
     {
-
-
         // todo 用户登录逻辑
         // jwt token
         $credentials = $request->only('name', 'password');

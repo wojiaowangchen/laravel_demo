@@ -7,5 +7,6 @@ laravel5.8框架基本功能部署<br>
   php artisan migrate  创建用户表<br>
 
 3.队列<br>
+  php artisan make:job ProcessPodcast <br>
   SendReminderEmail::dispatch($param)->allOnConnection('redis');<br>
   php artisan queue:work redis  启动队列，一般用supervise启动

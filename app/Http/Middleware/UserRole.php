@@ -8,6 +8,7 @@ class UserRole
 {
     /**
      * Handle an incoming request.
+     * 角色校验(能进到这里证明token验证通过)
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -15,8 +16,8 @@ class UserRole
      */
     public function handle($request, Closure $next, $from='')
     {
-//        dd($from);
-
+        $userId = $request->input('user_id');
+        $userName = $request->input('user_name');
         return $next($request);
     }
 }

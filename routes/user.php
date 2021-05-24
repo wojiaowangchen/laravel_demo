@@ -7,6 +7,6 @@
  *Time:下午4:40
  */
 
-Route::middleware('user.role:1111')->namespace('Api')->group(function() {
+Route::middleware('user.role:admin')->namespace('Api')->group(function() {
     Route::get('/demo', 'PassportController@demo');
 });

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SendReminderEmail;
+use App\Sdk\MiscSdk\MiscSapi;
 use Illuminate\Console\Command;
 use Crypt;
 class Test extends Command
@@ -40,7 +41,9 @@ class Test extends Command
     {
         $param = $this->argument('param');
 
-        SendReminderEmail::dispatch($param)->allOnConnection('redis')->delay(now()->addMinutes(1));
-        //
+//        SendReminderEmail::dispatch($param)->allOnConnection('redis')->delay(now()->addMinutes(1));
+
+        $sdk = new MiscSapi();
+
     }
 }

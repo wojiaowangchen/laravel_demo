@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "moell/laravel-layui-admin": "^1.0",
         "predis/predis": "^1.1",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "dev-develop",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

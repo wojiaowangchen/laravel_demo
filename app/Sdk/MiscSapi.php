@@ -1,14 +1,14 @@
 <?php
 /**
- * 微服务SDK.
+ * 微服务SDK.(被继承)
  * User: wangerxu
  * Date: 2018/6/7
- * Time: 下午6:30
+ * Time: 下午6:30xx
  */
 
-namespace App\Sdk\MiscSdk;
+namespace App\Sdk;
 
-use HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 
@@ -123,7 +123,8 @@ class MiscSapi {
                         $options[$k]['headers'] = $this->headers;
                     }
                     $request[$k] = new \GuzzleHttp\Psr7\Request($method,$url);
-                    $promises[$k] = HttpClient::sendAsync($request[$k],$options[$k])->then(function($response) use($k,$val,&$results){
+                    $client = new HttpClient();
+                    $promises[$k] = $client->sendAsync($request[$k],$options[$k])->then(function($response) use($k,$val,&$results){
                         $results[$k] = $response->getBody()->getContents();
                     });
                     $requestId[$k] = $api_request_id;
@@ -208,7 +209,8 @@ class MiscSapi {
         }
         try {
             $requestParam = in_array($method, ['get', 'delete']) ? (array) $params : [];
-            $response = HttpClient::request($method, $url, $options);
+            $client = new HttpClient();
+            $response = $client->request($method, $url, $options);
         } catch (GuzzleException $e) {
             $retData['code'] = $e->getCode();
             $retData['msg'] = $e->getMessage();

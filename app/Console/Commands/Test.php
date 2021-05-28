@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SendReminderEmail;
-use App\Sdk\MiscSdk\MiscSapi;
+use App\Sdk\FrogMiscSapi;
+use App\Sdk\MiscSapi;
 use Illuminate\Console\Command;
 use Crypt;
 class Test extends Command
@@ -43,7 +44,12 @@ class Test extends Command
 
 //        SendReminderEmail::dispatch($param)->allOnConnection('redis')->delay(now()->addMinutes(1));
 
-        $sdk = new MiscSapi();
+        $sdk = new FrogMiscSapi('http://api.1d1d100.net/base/location/provinces');
+        $result = $sdk -> test([]);
+        dd($result);
 
+//        $client = new \GuzzleHttp\Client();
+//        $res = $client->request('GET','http://api.1d1d100.net/base/location/provinces');
+//        dd($res->getBody()->getContents());
     }
 }

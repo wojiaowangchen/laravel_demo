@@ -12,3 +12,9 @@ laravel5.8框架基本功能部署<br>
   php artisan queue:work redis  启动队列，一般用supervise启动<br>
 
 4.httpClient （sdk，curl）<br>
+
+
+5.laravel-admin(后台系统)<br>
+  执行资源发布：php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"<br>
+  php artisan config:cache<br>
+  php artisan admin:install<br>
